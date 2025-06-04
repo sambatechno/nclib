@@ -8,12 +8,12 @@ import (
 )
 
 type AddActivityPayload struct {
-	ActivityName   string         `json:"activity_name"`
-	AssetId        string         `json:"asset_id"`
-	Timestamp      string         `json:"timestamp"`
-	Identity       string         `json:"identity"`
-	ActivitySource string         `json:"activity_source"`
-	ActivityParams map[string]any `json:"activity_params"`
+	ActivityName   string `json:"activity_name"`
+	AssetId        string `json:"asset_id"`
+	Timestamp      string `json:"timestamp"`
+	Identity       string `json:"identity"`
+	ActivitySource string `json:"activity_source"`
+	ActivityParams any    `json:"activity_params"`
 }
 
 var addActivityEndpoint = map[IDC]string{
