@@ -1,8 +1,15 @@
 package nclib
 
 import (
+	"context"
+
 	"resty.dev/v3"
 )
+
+type Client interface {
+	Close() error
+	AddActivity(ctx context.Context, payload ...AddActivityPayload) error
+}
 
 type client struct {
 	apiKey string
