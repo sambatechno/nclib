@@ -31,8 +31,10 @@ func NewClient(idc IDC, opt ...Option) *client {
 	return &cl
 }
 
-func (c *client) SetApiKey(apiKey string) {
-	c.apiKey = apiKey
+func (c *client) WithApiKey(apiKey string) *client {
+	newC := *c
+	newC.apiKey = apiKey
+	return &newC
 }
 
 func (c *client) req(ctx context.Context) *resty.Request {

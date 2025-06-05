@@ -27,7 +27,7 @@ func main() {
 		},
 	}
 
-	if err := client.AddActivity(context.Background(), payload); err != nil {
+	if err := client.WithApiKey(config["api_key"]).AddActivity(context.Background(), payload); err != nil {
 		fmt.Println("Error adding activity:", err)
 	}
 }
