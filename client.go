@@ -8,6 +8,7 @@ import (
 
 type Client interface {
 	Close() error
+	WithApiKey(apiKey string) *client
 	AddActivity(ctx context.Context, payload ...AddActivityPayload) error
 }
 
