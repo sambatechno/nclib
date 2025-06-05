@@ -17,10 +17,10 @@ type client struct {
 	idc    IDC
 }
 
-func NewClient(apiKey string, idc IDC, opt ...Option) *client {
-	rclient := resty.New().SetAuthToken(apiKey)
+func NewClient(idc IDC, opt ...Option) *client {
+	rclient := resty.New()
 	cl := client{
-		apiKey: apiKey,
+		// apiKey: apiKey,
 		client: rclient,
 		idc:    idc,
 	}
@@ -29,6 +29,17 @@ func NewClient(apiKey string, idc IDC, opt ...Option) *client {
 	}
 
 	return &cl
+}
+
+func (c *client) SetApiKey(apiKey string) {
+	c.apiKey = apiKey
+}
+
+func (c *client) req(ctx context.Context) *resty.Request {
+	if c.client == nil {
+		c.client = resty.New()
+	}
+	return c.client.R().SetAuthToken(c.apiKey).SetContext(ctx)
 }
 
 type Option func(*client)

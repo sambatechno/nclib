@@ -23,8 +23,7 @@ var addActivityEndpoint = map[IDC]string{
 }
 
 func (c *client) AddActivity(ctx context.Context, payload ...AddActivityPayload) error {
-	res, err := c.client.R().
-		SetContext(ctx).
+	res, err := c.req(ctx).
 		SetBody(payload).
 		Post(addActivityEndpoint[c.idc])
 	if err != nil {

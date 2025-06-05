@@ -13,7 +13,7 @@ import (
 func main() {
 	config := loadConfig()
 
-	client := nclib.NewClient(config["api_key"], nclib.US, nclib.WithDebug(true))
+	client := nclib.NewClient(nclib.US, nclib.WithDebug(true))
 	timestamp := time.Now().Format(time.RFC3339)
 	payload := nclib.AddActivityPayload{
 		ActivityName:   "test_activity",
