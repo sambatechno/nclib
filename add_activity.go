@@ -33,11 +33,12 @@ func (c *client) AddActivity(ctx context.Context, payload ...AddActivityPayload)
 	defer res.Body.Close()
 	resJson, _ := io.ReadAll(res.Body)
 
-	var resData map[string]string
-	json.Unmarshal(resJson, &resData)
-
+	var resData map[string]any
 	if res.StatusCode() != 200 {
-		return fmt.Errorf("failed to add activity status %d, response: %s", res.StatusCode(), resData["error"])
+		if err := json.Unmarshal(resJson, &resData); err != nil || len(resData) == 0 {
+			return fmt.Errorf("failed to add activity status %d, response: %s", res.StatusCode(), string(resJson))
+		}
+		return fmt.Errorf("failed to add activity status %d, error: %v", res.StatusCode(), resData)
 	}
 
 	return nil
